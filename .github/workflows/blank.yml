@@ -13,15 +13,25 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install Databricks CLI
-      run: pip install databricks-cli
+    - name: Install/Upgrade Databricks CLI
+      run: |
+        pip install --upgrade databricks-cli
+          
+    - name: Upgrade urllib3 and chardet
+      run: pip install --upgrade urllib3==1.26.14 chardet==3.0.4
+
 
     - name: Configure Databricks CLI
       run: |
-        databricks configure --host "$DATABRICKS_HOST" --token "$DATABRICKS_TOKEN"
+          echo "[DEFAULT]" > ~/.databricks-config
+          echo "host = $DATABRICKS_HOST" >> ~/.databricks-config
+          echo "token = $DATABRICKS_TOKEN" >> ~/.databricks-config
+      shell: bash
       env:
-        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+   
 
     - name: Copy files to Databricks workspace
       run: |
