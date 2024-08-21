@@ -32,7 +32,7 @@ jobs:
           databricks repos list
       - name: Copy files to Databricks workspace
         run: |
-            databricks workspace import_dir --overwrite . "/hos"
+            databricks workspace import_dir  "/Hosny"
         env:
-            DATABRICKS_WORKSPACE_PATH: "/hos"
+            DATABRICKS_WORKSPACE_PATH: "/Hosny"
             
