@@ -18,7 +18,7 @@ jobs:
 
     - name: Configure Databricks CLI
       run: |
-        echo "$DATABRICKS_HOST" > ~/.databricks-config
+        echo "${{ secrets.DATABRICKS_HOST }}" > ~/.databricks-config
         databricks configure --token <<< "${{ secrets.DATABRICKS_TOKEN }}"
 
     - name: Copy files to Databricks workspace
