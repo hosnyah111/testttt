@@ -20,7 +20,7 @@ jobs:
       run: |
         databricks configure --host "$DATABRICKS_HOST" --token "$DATABRICKS_TOKEN"
       env:
-        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
         DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
     - name: Copy files to Databricks workspace
