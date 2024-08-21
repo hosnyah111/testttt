@@ -1,0 +1,28 @@
+name: Deploy to Databricks
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-to-databricks:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install Databricks CLI
+      run: pip install databricks-cli
+
+    - name: Configure Databricks CLI
+      run: |
+        echo "$DATABRICKS_HOST" > ~/.databricks-config
+        databricks configure --token <<< "${{ secrets.DATABRICKS_TOKEN }}"
+
+    - name: Copy files to Databricks workspace
+      run: |
+        databricks workspace import_dir --exclude-hidden-files . /${{ secrets.DATABRICKS_FOLDER }}
+      env:
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
