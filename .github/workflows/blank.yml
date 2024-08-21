@@ -4,37 +4,29 @@ on:
   push:
     branches:
       - main
-
+...
 jobs:
-  deploy-to-databricks:
+  main:
     runs-on: ubuntu-latest
-
+    # Name of the environment you created
+    environment: Testt
+    ...
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Check out repository
+        uses: actions/checkout@v3
 
-    - name: Install/Upgrade Databricks CLI
-      run: |
-        pip install --upgrade databricks-cli
-          
-    - name: Upgrade urllib3 and chardet
-      run: pip install --upgrade urllib3==1.26.14 chardet==3.0.4
+      # Install databricks CLI as per https://docs.databricks.com/dev-tools/cli/databricks-cli.html
+      - name: Install databricks CLI
+        run: |
+         curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
 
-
-    - name: Configure Databricks CLI
-      run: |
-          echo "[DEFAULT]" > ~/.databricks-config
-          echo "host = $DATABRICKS_HOST" >> ~/.databricks-config
-          echo "token = $DATABRICKS_TOKEN" >> ~/.databricks-config
-      shell: bash
-      env:
-          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      # List the databricks repos within the workspace whose credentials
+      # are stored in the Github Environment "my-environment"
+      - name: List databricks repos
+        env:
+          # Note the host is an "environment variable" in the Github Environment
+          # while the token is a "secret" in the Github Environment
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-
-   
-
-    - name: Copy files to Databricks workspace
-      run: |
-        databricks workspace import_dir --overwrite . "/$DATABRICKS_FOLDER"
-      env:
-        DATABRICKS_WORKSPACE_PATH: ${{ secrets.DATABRICKS_FOLDER }}
+        run: |
+          databricks repos list
