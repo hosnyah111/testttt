@@ -32,7 +32,8 @@ jobs:
           databricks repos list
       - name: Copy files to Databricks workspace
         run: |
-          databricks workspace import_dir ./Workspace/Users/ahosny@orion360.com/Hosny --overwrite
+          databricks workspace import_dir ./Workspace/Users/ahosny@orion360.com/Hosny 
+          
         env:
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
