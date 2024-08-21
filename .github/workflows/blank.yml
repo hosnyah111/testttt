@@ -11,13 +11,20 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install Databricks CLI
       run: pip install databricks-cli
 
-    - name: Copy files to Databricks workspace
+    - name: Configure Databricks CLI
       run: |
-        databricks workspace import_dir --exclude-hidden-files . /${{ secrets.DATABRICKS_FOLDER }}
+        databricks configure --host "$DATABRICKS_HOST" --token "$DATABRICKS_TOKEN"
       env:
         DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+    - name: Copy files to Databricks workspace
+      run: |
+        databricks workspace import_dir --overwrite . "/$DATABRICKS_FOLDER"
+      env:
+        DATABRICKS_WORKSPACE_PATH: ${{ secrets.DATABRICKS_FOLDER }}
