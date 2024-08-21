@@ -32,7 +32,7 @@ jobs:
           databricks repos list
       - name: Copy files to Databricks workspace
         run: |
-          databricks workspace import_dir ./Workspace/Users/ahosny@orion360.com/Hosny 
+          databricks workspace mkdirs "/Workspace/Users/ahosny@orion360.com/Hsny" 
           
         env:
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
