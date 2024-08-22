@@ -32,6 +32,9 @@ jobs:
           databricks repos list
           
       - name: List Files in Repository
+        env:
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: databricks workspace list "/Workspace/Users/ahosny@orion360.com"
 
       - name: List Files in databricks
