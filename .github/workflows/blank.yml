@@ -32,7 +32,7 @@ jobs:
           databricks repos list
           
       - name: List Files in Repository
-        run: databricks workspace ls 
+        run: databricks workspace list
 
       - name: List Files in databricks
         run: ls -R .
