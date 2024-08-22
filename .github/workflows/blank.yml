@@ -34,7 +34,7 @@ jobs:
       - name: Copy files to Databricks workspace
         run: |
           # databricks workspace import ./ /Workspace/Users/ahosny@orion360.com/Hosny
-          databricks workspace export "/Workspace/Users/ahosny@orion360.com/Hosny/hos" ./
+          databricks workspace export "/Workspace/Users/ahosny@orion360.com/Hosny/hos" /Hosny
 
         env:
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
