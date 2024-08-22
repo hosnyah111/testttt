@@ -30,7 +30,10 @@ jobs:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
           databricks repos list
-      
+          
+      - name: List Files in Repository
+        run: ls -R .
+        
       - name: Copy files to Databricks workspace
         run: |
           databricks workspace import_dir / /Workspace/Users/ahosny@orion360.com/Hosny
