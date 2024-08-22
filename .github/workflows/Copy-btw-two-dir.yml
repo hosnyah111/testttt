@@ -14,7 +14,7 @@ jobs:
       - name: Checkout Source Repo
         uses: actions/checkout@v3
         with:
-          repository: user/testttt
+          repository: testttt
           path: ./
           token: ${{ secrets.SOURCE_REPO_PAT }} # Personal Access Token
 
@@ -22,7 +22,7 @@ jobs:
       - name: Checkout Target Repo
         uses: actions/checkout@v3
         with:
-          repository: user/test-prod
+          repository: test-prod
           path: ./
           token: ${{ secrets.SOURCE_REPO_PAT }} # Personal Access Token
 
