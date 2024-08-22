@@ -2,10 +2,12 @@
 name: Deploy to Databricks
 
 # The trigger  
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
+
+# on:
+#   push:
+#     branches:
+#       - main
 
 jobs:
   deploy-to-databricks-dev:
