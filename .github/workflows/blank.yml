@@ -31,19 +31,19 @@ jobs:
         run: |
           databricks repos list
           
-      - name: List Files in Repository
-        env:
-          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-        run: databricks workspace list "/Workspace/Users/ahosny@orion360.com"
+      # - name: List Files in Repository
+      #   env:
+      #     DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      #     DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+      #   run: databricks workspace list "/Workspace/Users/ahosny@orion360.com"
 
-      - name: List Files in databricks
-        run: ls -R .
+      # - name: List Files in databricks
+      #   run: ls -R .
         
       - name: Copy files to Databricks workspace
         run: |
-          databricks workspace import-dir ./Hosny /Workspace/Users/ahosny@orion360.com/Hosny
-          databricks workspace export-dir "/Workspace/Users/ahosny@orion360.com/Hosny" /
+          databricks workspace import-dir ./ /Workspace/Users/ahosny@orion360.com/Hosny
+          databricks workspace export-dir "/Workspace/Users/ahosny@orion360.com/Hosny" ./Hosny
 
         env:
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
