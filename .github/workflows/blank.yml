@@ -32,11 +32,14 @@ jobs:
           databricks repos list
           
       - name: List Files in Repository
+        run: databricks workspace ls 
+
+      - name: List Files in databricks
         run: ls -R .
         
       - name: Copy files to Databricks workspace
         run: |
-          databricks workspace import_dir / /Workspace/Users/ahosny@orion360.com/Hosny
+          databricks workspace import_dir ./Hosny /Workspace/Users/ahosny@orion360.com/Hosny
           databricks workspace export_dir "/Workspace/Users/ahosny@orion360.com/Hosny" /
 
         env:
