@@ -31,19 +31,11 @@ jobs:
         run: |
           databricks repos list
       
-      - name: databricks-import-directory
-        uses: microsoft/databricks-import-directory@v1.0.0
-        with:
-          databricks-host: https://<instance-name>.cloud.databricks.com
-          databricks-token: token
-          local-path: testtttt
-          remote-path: "/Workspace/Users/ahosny@orion360.com/Hosny" 
-      
-      # - name: Copy files to Databricks workspace
-      #   run: |
-      #     databricks workspace import_dir .  "/Workspace/Users/ahosny@orion360.com/Hosny" 
+      - name: Copy files to Databricks workspace
+        run: |
+          databricks workspace import_dir testtttt  "/Workspace/Users/ahosny@orion360.com/Hosny" 
           
-      #   env:
-      #     DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-      #     DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        env:
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
             
