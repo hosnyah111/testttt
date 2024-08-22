@@ -1,0 +1,42 @@
+name: Copy Directory Between Repos
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  copy-directory:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the first (source) repository
+      - name: Checkout Source Repo
+        uses: actions/checkout@v3
+        with:
+          repository: user/testttt
+          path: ./
+          token: ${{ secrets.SOURCE_REPO_PAT }} # Personal Access Token
+
+      # Step 2: Checkout the second (target) repository
+      - name: Checkout Target Repo
+        uses: actions/checkout@v3
+        with:
+          repository: user/test-prod
+          path: ./
+          token: ${{ secrets.SOURCE_REPO_PAT }} # Personal Access Token
+
+      # Step 3: Copy directory from source to target
+      - name: Copy Directory
+        run: |
+          cp -R testttt/Hosny test-prod/
+
+      # Step 4: Commit and push changes to target repo
+      - name: Commit and Push Changes
+        run: |
+          cd target-repo
+          git config --global user.email "hosny.ah.1@pg.com"
+          git config --global user.name "hosnyah111"
+          git add .
+          git commit -m "Copied directory from source-repo"
+          git push origin main
