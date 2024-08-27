@@ -19,23 +19,24 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: hosnyah111/testttt
-          path: ./
+          path: source
           token: ${{ secrets.SOURCE_REPO_PAT }} # Personal Access Token
           ref: main
+          
 
       # Step 2: Checkout the second (target) repository
       - name: Checkout Target Repo
         uses: actions/checkout@v3
         with:
           repository: hosnyah111/test_Prod
-          path: ./
+          path: target
           token: ${{ secrets.SOURCE_REPO_PAT }} # Personal Access Token
           ref: Master
 
       # Step 3: Copy directory from source to target
       - name: Copy Directory
         run: |
-          cp -R Hosny/ ./
+          cp -R Hosny target/ 
 
       # Step 4: Commit and push changes to target repo
       - name: Commit and Push Changes
