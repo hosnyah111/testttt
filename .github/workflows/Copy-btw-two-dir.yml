@@ -30,7 +30,7 @@ jobs:
           repository: hosnyah111/test_Prod
           path: ./
           token: ${{ secrets.SOURCE_REPO_PAT }} # Personal Access Token
-          ref: master
+          ref: Master
 
       # Step 3: Copy directory from source to target
       - name: Copy Directory
