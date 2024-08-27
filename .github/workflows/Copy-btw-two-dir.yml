@@ -38,7 +38,7 @@ jobs:
         run: |
           cp -rt source/ target/
 
-      # Step 4: Commit and push changes to target repo
+      # Step 4: Commit and push changes to target repoo
       - name: Commit and Push Changes
         run: |
           cd target
