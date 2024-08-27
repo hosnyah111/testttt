@@ -35,7 +35,7 @@ jobs:
       # Step 3: Copy directory from source to target
       - name: Copy Directory
         run: |
-          cp -R testttt/Hosny test_Prod/
+          cp -R Hosny/ ./
 
       # Step 4: Commit and push changes to target repo
       - name: Commit and Push Changes
