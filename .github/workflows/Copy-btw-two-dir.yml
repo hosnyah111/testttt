@@ -46,4 +46,4 @@ jobs:
           git config --global user.name "hosnyah111"
           git add .
           git commit -m "Copied directory from source-repo"
-          git push origin Master
+          git push origin dev
