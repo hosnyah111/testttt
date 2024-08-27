@@ -18,6 +18,7 @@ jobs:
           repository: hosnyah111/testttt
           path: ./
           token: ${{ secrets.SOURCE_REPO_PAT }} # Personal Access Token
+          ref: main
 
       # Step 2: Checkout the second (target) repository
       - name: Checkout Target Repo
@@ -26,6 +27,7 @@ jobs:
           repository: hosnyah111/test-prod
           path: ./
           token: ${{ secrets.SOURCE_REPO_PAT }} # Personal Access Token
+          ref: master
 
       # Step 3: Copy directory from source to target
       - name: Copy Directory
