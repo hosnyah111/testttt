@@ -10,6 +10,9 @@ on:
 jobs:
   copy-directory:
     runs-on: ubuntu-latest
+    permissions: 
+      id-token: write 
+      contents: read
     steps:
       # Step 1: Checkout the first (source) repository
       - name: Checkout Source Repo
