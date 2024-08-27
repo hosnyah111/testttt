@@ -41,7 +41,7 @@ jobs:
       # Step 4: Commit and push changes to target repo
       - name: Commit and Push Changes
         run: |
-          cd target-repo
+          cd target
           git config --global user.email "hosny.ah.1@pg.com"
           git config --global user.name "hosnyah111"
           git add .
