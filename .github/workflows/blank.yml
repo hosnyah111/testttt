@@ -47,17 +47,30 @@ jobs:
       - name: Copy files to Databricks workspace
         run: |
           databricks workspace export-dir "/Workspace/Repos/CICD_test/testttt/" ./testttt
-          databricks workspace import-dir ./testttt "/Workspace/Hosny"
+          # databricks workspace import-dir ./testttt "/Workspace/Hosny"
 
         env:
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-            
+
+      # Upload the exported directory as an artifact
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: testttt
+          path: ./testttt   
+
+
   deploy-to-databricks-prod:
       runs-on: ubuntu-latest
       # Name of the environment you created
       environment: Testt
       steps:
+        - name: Download artifact
+          uses: actions/download-artifact@v3
+          with:
+            name: testttt
+
         - name: Check out repository
           uses: actions/checkout@v3
   
