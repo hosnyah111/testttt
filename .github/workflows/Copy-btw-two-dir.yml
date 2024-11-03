@@ -2,9 +2,9 @@ name: Copy Directory Between Repos
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
 
 
 jobs:
