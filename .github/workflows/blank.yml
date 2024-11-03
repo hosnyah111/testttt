@@ -26,73 +26,72 @@ jobs:
 
       # List the databricks repos within the workspace whose credentials
       # are stored in the Github Environment "my-environment"
-      - name: List databricks repos
-        env:
-          # Note the host is an "environment variable" in the Github Environment
-          # while the token is a "secret" in the Github Environment
-          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-        run: |
-          databricks repos list
+      # - name: List databricks repos
+      #   env:
+      #     # Note the host is an "environment variable" in the Github Environment
+      #     # while the token is a "secret" in the Github Environment
+      #     DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      #     DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+      #   run: |
+      #     databricks repos list
           
-      - name: List Files in Repository
-        env:
-          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-        run: databricks workspace list "/Workspace/Repos/"
+      # - name: List Files in Repository
+      #   env:
+      #     DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      #     DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+      #   run: databricks workspace list "/Workspace/Repos/"
 
-      - name: List Files in databricks
-        run: ls -R .
+      # - name: List Files in databricks
+      #   run: ls -R .
         
       - name: Copy files to Databricks workspace
         run: |
           databricks workspace export-dir "/Workspace/Repos/CICD_test/testttt/" ./testttt
           databricks workspace import-dir ./testttt "/Workspace/Hosny"
-          # databricks workspace cp  /Workspace/Repos/CICD_test/testttt/ /Workspace/Hosny
-          # databricks workspace export-dir "/Workspace/Users/ahosny@orion360.com/Hosny" ./Hosny
 
         env:
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
             
-  # deploy-to-databricks-prod:
-  #     runs-on: ubuntu-latest
-  #     # Name of the environment you created
-  #     environment: Testt
-  #     steps:
-  #       - name: Check out repository
-  #         uses: actions/checkout@v3
+  deploy-to-databricks-prod:
+      runs-on: ubuntu-latest
+      # Name of the environment you created
+      environment: Testt
+      steps:
+        - name: Check out repository
+          uses: actions/checkout@v3
   
-  #       # Install databricks CLI as per https://docs.databricks.com/dev-tools/cli/databricks-cli.html
-  #       - name: Install databricks CLI
-  #         run: |
-  #          curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+        # Install databricks CLI as per https://docs.databricks.com/dev-tools/cli/databricks-cli.html
+        - name: Install databricks CLI
+          run: |
+           curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
   
-  #       # List the databricks repos within the workspace whose credentials
-  #       # are stored in the Github Environment "my-environment"
-  #       - name: List databricks repos
-  #         env:
-  #           # Note the host is an "environment variable" in the Github Environment
-  #           # while the token is a "secret" in the Github Environment
-  #           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-  #           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-  #         run: |
-  #           databricks repos list
+        # List the databricks repos within the workspace whose credentials
+        # are stored in the Github Environment "my-environment"
+        # - name: List databricks repos
+        #   env:
+        #     # Note the host is an "environment variable" in the Github Environment
+        #     # while the token is a "secret" in the Github Environment
+        #     DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST_PROD }}
+        #     DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN_PROD }}
+        #   run: |
+        #     databricks repos list
             
-  #       # - name: List Files in Repository
-  #       #   env:
-  #       #     DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-  #       #     DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-  #       #   run: databricks workspace list "/Workspace/Users/ahosny@orion360.com"
+        # - name: List Files in Repository
+        #   env:
+        #     DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST_PROD }}
+        #     DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN_PROD }}
+        #   run: databricks workspace list "/Workspace/Users/ahosny@orion360.com"
   
-  #       # - name: List Files in databricks
-  #       #   run: ls -R .
+        # - name: List Files in databricks
+        #   run: ls -R .
           
-  #       - name: Copy files to Databricks workspace
-  #         run: |
-  #           databricks workspace import-dir ./ /Workspace/Users/ahosny@orion360.com/Hosny
-  #           # databricks workspace export-dir "/Workspace/Users/ahosny@orion360.com/Hosny" ./Hosny
+        - name: Copy files to Databricks workspace prod
+          run: |
+            databricks workspace import-dir ./testttt "/Workspace/Hosny"
+            # databricks workspace import-dir ./ /Workspace/Users/ahosny@orion360.com/Hosny
+            # databricks workspace export-dir "/Workspace/Users/ahosny@orion360.com/Hosny" ./Hosny
   
-  #         env:
-  #           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
-  #           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          env:
+            DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST_PROD }}
+            DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN_PROD }}
