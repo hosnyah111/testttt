@@ -46,7 +46,7 @@ jobs:
         
       - name: Copy files to Databricks workspace
         run: |
-          databricks workspace cp -r /Workspace/Users/saba_guset@sabamedical.com/testttt /Workspace/Hosny
+          databricks workspace import-dir /Workspace/Users/saba_guset@sabamedical.com/testttt /Workspace/Hosny
           # databricks workspace export-dir "/Workspace/Users/ahosny@orion360.com/Hosny" ./Hosny
 
         env:
