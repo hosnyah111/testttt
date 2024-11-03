@@ -102,7 +102,7 @@ jobs:
           
         - name: Copy files to Databricks workspace prod
           run: |
-            databricks workspace import-dir ./testttt "/Workspace/Hosny"
+            databricks workspace import-dir /home/runner/work/testttt/testttt "/Workspace/Hosny"
             # databricks workspace import-dir ./ /Workspace/Users/ahosny@orion360.com/Hosny
             # databricks workspace export-dir "/Workspace/Users/ahosny@orion360.com/Hosny" ./Hosny
   
