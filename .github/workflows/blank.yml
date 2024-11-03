@@ -13,7 +13,7 @@ jobs:
   deploy-to-databricks-dev:
     runs-on: ubuntu-latest
     # Name of the environment you created
-    environment: Testt
+    # environment: Testt
     
     steps:
       - name: Check out repository
@@ -64,7 +64,8 @@ jobs:
   deploy-to-databricks-prod:
       runs-on: ubuntu-latest
       # Name of the environment you created
-      environment: Testt
+      # environment: Testt
+      needs: deploy-to-databricks-dev
       steps:
         - name: Download artifact
           uses: actions/download-artifact@v3
