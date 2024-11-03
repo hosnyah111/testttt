@@ -46,7 +46,7 @@ jobs:
         
       - name: Copy files to Databricks workspace
         run: |
-          databricks workspace cp "/Workspace/Repos/CICD_test/testttt/" "/Workspace/Hosny"
+          databricks workspace cp -r "/Workspace/Repos/CICD_test/testttt/" "/Workspace/Hosny"
           # databricks workspace export-dir "/Workspace/Users/ahosny@orion360.com/Hosny" ./Hosny
 
         env:
