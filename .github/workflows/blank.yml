@@ -25,6 +25,7 @@ jobs:
          curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
 
       # List the databricks repos within the workspace whose credentials
+      
       # are stored in the Github Environment "my-environment"
       # - name: List databricks repos
       #   env:
